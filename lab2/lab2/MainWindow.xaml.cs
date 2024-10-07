@@ -1,23 +1,40 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using lab2.Tests;
 
-namespace lab2;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace lab2
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        // Переход на страницу фракталов и скрытие кнопок
+        private void NavigateToFractalsPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new FractalsPageTests(this));
+            HideButtons();
+        }
+
+        // Переход на страницу Ханойской башни и скрытие кнопок
+        private void NavigateToHanoiTowerPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new HanoiTowerPageTests(this));
+            HideButtons();
+        }
+
+        // Метод для скрытия кнопок
+        public void HideButtons()
+        {
+            ButtonsPanel.Visibility = Visibility.Collapsed;
+        }
+
+        // Метод для отображения кнопок
+        public void ShowButtons()
+        {
+            ButtonsPanel.Visibility = Visibility.Visible;
+        }
     }
 }

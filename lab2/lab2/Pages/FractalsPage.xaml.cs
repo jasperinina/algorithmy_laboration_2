@@ -1,8 +1,8 @@
-﻿using System.Windows;
+﻿using System.Windows.Controls;
 
 namespace lab2.Pages;
 
-public partial class FractalsPage : Window
+public partial class FractalsPage : Page
 {
     public FractalsPage()
     {

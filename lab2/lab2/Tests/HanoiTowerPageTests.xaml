@@ -1,0 +1,16 @@
+﻿<Page x:Class="lab2.Tests.HanoiTowerPageTests"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Hanoi Tower Page"
+      Height="900" Width="1600">
+    <Grid>
+        <TextBlock Text="Тестирование Ханойской башни"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+        
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+            <TextBlock Text="Страница Ханойской Башни" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Content="Назад" Width="200" Height="50" Click="GoBack_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
