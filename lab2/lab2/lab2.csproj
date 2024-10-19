@@ -9,7 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Fractals\" />
       <Folder Include="HanoiTowers\" />
       <Folder Include="UI\" />
     </ItemGroup>
