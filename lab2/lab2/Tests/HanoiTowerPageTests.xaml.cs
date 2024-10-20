@@ -119,7 +119,7 @@ namespace lab2.Tests
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
             // Возвращаемся в главное окно и показываем кнопки
-            _mainWindow.ShowButtons();
+            //_mainWindow.ShowButtons();
             _mainWindow.MainFrame.Content = null;  // Очистка Frame
         }
     }

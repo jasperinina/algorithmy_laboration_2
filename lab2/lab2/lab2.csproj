@@ -10,7 +10,6 @@
 
     <ItemGroup>
       <Folder Include="HanoiTowers\" />
-      <Folder Include="UI\" />
     </ItemGroup>
 
 </Project>

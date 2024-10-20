@@ -18,13 +18,10 @@ D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.pdb
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.genruntimeconfig.cache
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\ref\lab2.dll
-D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Tests\FractalsPageTests.baml
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Tests\HanoiTowerPageTests.baml
-D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Tests\FractalsPageTests.g.cs
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Tests\HanoiTowerPageTests.g.cs
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\FractalsPage.g.cs
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\HanoiTowerPage.g.cs
-D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2_MarkupCompile.lref
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\FractalsPage.baml
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\HanoiTowerPage.baml
 C:\Users\Юля\Desktop\Универ\labs for algorithms\lab2\algorithmy_laboration_2\lab2\lab2\bin\Debug\net8.0-windows\lab2.exe
@@ -56,3 +53,4 @@ C:\Users\Юля\Desktop\Универ\labs for algorithms\lab2\algorithmy_laborat
 C:\Users\Юля\Desktop\Универ\labs for algorithms\lab2\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.pdb
 C:\Users\Юля\Desktop\Универ\labs for algorithms\lab2\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.genruntimeconfig.cache
 C:\Users\Юля\Desktop\Универ\labs for algorithms\lab2\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\ref\lab2.dll
+D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\UI\Styles.baml
