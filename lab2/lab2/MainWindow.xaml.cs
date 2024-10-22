@@ -15,13 +15,25 @@ namespace lab2
         // Переход на страницу фракталов
         private void FractalRadioButton_Checked(object sender, RoutedEventArgs e)
         {
+            // Очистить динамически добавленные элементы на текущей странице
+            if (MainFrame.Content is FractalsPage fractalsPage)
+            {
+                fractalsPage.ClearDynamicElements();
+            }
             MainFrame.Navigate(new FractalsPage(this));
         }
 
         // Переход на страницу Ханойской башни
         private void HanoiRadioButton_Checked(object sender, RoutedEventArgs e)
         {
+            // Очистить динамически добавленные элементы на текущей странице
+            if (MainFrame.Content is FractalsPage fractalsPage)
+            {
+                fractalsPage.ClearDynamicElements();
+            }
+            
             MainFrame.Navigate(new HanoiTowerPageTests(this));
         }
+        
     }
 }

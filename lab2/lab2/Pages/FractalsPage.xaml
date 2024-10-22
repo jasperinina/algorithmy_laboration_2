@@ -20,12 +20,11 @@
 
         <!-- Правая часть для отрисовки фрактала -->
         <Canvas x:Name="canvas"
-                Width="500"
-                Height="500"
+                Width="400"
+                Height="800"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Grid.Column="1"
                 Margin="20"/>
-        
     </Grid>
 </Page>
