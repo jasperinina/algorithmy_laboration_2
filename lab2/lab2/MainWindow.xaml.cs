@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using lab2.Pages;
-using lab2.Tests;
 
 namespace lab2
 {
@@ -32,7 +31,7 @@ namespace lab2
                 fractalsPage.ClearDynamicElements();
             }
             
-            MainFrame.Navigate(new HanoiTowerPageTests(this));
+            MainFrame.Navigate(new HanoiTowerPage());
         }
         
     }

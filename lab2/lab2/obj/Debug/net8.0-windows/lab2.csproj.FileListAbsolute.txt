@@ -18,8 +18,6 @@ D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.pdb
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.genruntimeconfig.cache
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\ref\lab2.dll
-D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Tests\HanoiTowerPageTests.baml
-D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Tests\HanoiTowerPageTests.g.cs
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\FractalsPage.g.cs
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\HanoiTowerPage.g.cs
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\FractalsPage.baml

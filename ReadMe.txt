@@ -1,0 +1,2 @@
+EXE - https://drive.google.com/drive/folders/1NhNscD_So5oEadkW7KcDq44SqSPIkw8k?dmr=1&ec=wgc-drive-hero-goto
+Отчет - https://docs.google.com/document/d/1QNjCA7Xe7-JPAWimdRJurMD7N_l2LylQJA81Evv5I58/edit?tab=t.0

@@ -2,7 +2,6 @@
  using System.Windows;
  using System.Windows.Controls;
  using System.Windows.Media;
- using lab2.Tests;
  
  namespace lab2.Pages;
  

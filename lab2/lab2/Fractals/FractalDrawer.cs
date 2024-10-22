@@ -17,7 +17,7 @@ namespace lab2.Fractals
         private int _thickness;
         private int _coordX;
         private int _coordY;
-        private int _radius = 85;
+        private int _radius = 130;
         private double _angle = Math.PI / 2;
         public DurersStar(Canvas canvas, Point center, Brush brushForThickness, int thickness, int deth)
         {

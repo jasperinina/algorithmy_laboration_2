@@ -179,7 +179,7 @@ public partial class HanoiTowerPage : Page
         }
         else
         {
-            MessageBox.Show("введите корректное количество колец");
+            MessageBox.Show("Введите корректное количество колец");
         }
         startButton.IsEnabled = true;
         ringCountTextBox.IsEnabled = true;
