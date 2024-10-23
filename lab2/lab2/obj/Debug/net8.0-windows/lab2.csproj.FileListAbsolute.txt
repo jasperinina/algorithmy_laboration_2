@@ -52,3 +52,28 @@ C:\Users\Юля\Desktop\Универ\labs for algorithms\lab2\algorithmy_laborat
 C:\Users\Юля\Desktop\Универ\labs for algorithms\lab2\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.genruntimeconfig.cache
 C:\Users\Юля\Desktop\Универ\labs for algorithms\lab2\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\ref\lab2.dll
 D:\Study\2 курс\algorithms\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\UI\Styles.baml
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\bin\Debug\net8.0-windows\lab2.exe
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\bin\Debug\net8.0-windows\lab2.deps.json
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\bin\Debug\net8.0-windows\lab2.runtimeconfig.json
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\bin\Debug\net8.0-windows\lab2.dll
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\bin\Debug\net8.0-windows\lab2.pdb
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\MainWindow.baml
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\FractalsPage.baml
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\HanoiTowerPage.baml
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\UI\Styles.baml
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\FractalsPage.g.cs
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\Pages\HanoiTowerPage.g.cs
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\App.g.cs
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2_MarkupCompile.cache
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.g.resources
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.GeneratedMSBuildEditorConfig.editorconfig
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.AssemblyInfoInputs.cache
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.AssemblyInfo.cs
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.csproj.CoreCompileInputs.cache
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.sourcelink.json
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.dll
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\refint\lab2.dll
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.pdb
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\lab2.genruntimeconfig.cache
+D:\Study\algorithms anna\algorithmy_laboration_2\lab2\lab2\obj\Debug\net8.0-windows\ref\lab2.dll

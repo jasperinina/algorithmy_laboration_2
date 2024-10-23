@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Drawing;
@@ -19,6 +14,7 @@ namespace lab2.Fractals
         private int _coordY;
         private int _radius = 130;
         private double _angle = Math.PI / 2;
+        
         public DurersStar(Canvas canvas, Point center, Brush brushForThickness, int thickness, int deth)
         {
             _canvas = canvas;
@@ -28,8 +24,7 @@ namespace lab2.Fractals
             _coordY = center.Y;
             DrawStar(_coordX, _coordY, _radius, _angle, deth);
         }
-
-
+        
         private void DrawLine(Point start, Point end, Brush color, int thickness)
         {
             Line line = new Line();
@@ -89,6 +84,7 @@ namespace lab2.Fractals
                         d - 1);
                 }
             }
+            
             DrawPentagon(coordXForFirstPentagon, coordYForFirstPentagon, radius, angle);
 
             if (d > 0)

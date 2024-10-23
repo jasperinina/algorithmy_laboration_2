@@ -1,179 +1,145 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using lab2.HanoiTower;
 
 namespace lab2.Pages;
 
 public partial class HanoiTowerPage : Page
 {
-    private const int num_of_towers = 3;
-    private const int RingHeight = 20;
-    private const int RingWidthIncrement = 15;
-    private readonly Stack<int>[] towers = new Stack<int>[num_of_towers];
+    private readonly Stack<int>[] towers = new Stack<int>[3];
     private Rectangle[,] diskRectangles;
     private int animationSpeed = 20;
     private CancellationTokenSource cancellationTokenSource;
+    private HanoiTowerDraw hanoiTowerDraw;
+    
+    private MainWindow _mainWindow;
 
-    public HanoiTowerPage()
+    public HanoiTowerPage(MainWindow mainWindow)
     {
         InitializeComponent();
         InitializeTowers();
+        _mainWindow = mainWindow;
+        hanoiTowerDraw = new HanoiTowerDraw(HanoiCanvas);
+        AddHanoiTowerControls();
     }
+    
     private void InitializeTowers()
     {
-        for (int i = 0; i < num_of_towers; i++)
+        for (int i = 0; i < 3; i++)
         {
             towers[i] = new Stack<int>();
         }
     }
 
-    private void DrawTowers()
+    // Метод для динамического добавления элементов управления
+    private void AddHanoiTowerControls()
     {
-        HanoiCanvas.Children.Clear();
-        double canvasWidth = HanoiCanvas.ActualWidth;
-        double towerSpacing = canvasWidth / num_of_towers;
-
-        for (int i = 0; i < num_of_towers; i++)
+        StackPanel panel = new StackPanel();
         {
-            double towerX = towerSpacing / 2 + i * towerSpacing;
-            var tower_rod = new Line
-            {
-                X1 = towerX,
-                Y1 = 200,
-                X2 = towerX,
-                Y2 = HanoiCanvas.ActualHeight - 50,
-                Stroke = Brushes.Black,
-                StrokeThickness = 4
-            };
-            HanoiCanvas.Children.Add(tower_rod);
-            var tower_base = new Line
-            {
-                X1 = towerX - towerSpacing / 3 - 50,
-                Y1 = HanoiCanvas.ActualHeight - 50,
-                X2 = towerX + towerSpacing / 3 + 50,
-                Y2 = HanoiCanvas.ActualHeight - 50,
-                Stroke = Brushes.Black,
-                StrokeThickness = 4
-            };
-            HanoiCanvas.Children.Add(tower_base);
-        }
-    }
-
-    private void InitializeRings(int numberOfRings)
-    {
-        diskRectangles = new Rectangle[numberOfRings, num_of_towers];
-
-        for (int i = 0; i < numberOfRings; i++)
+            // Отступ от верхнего блока на 30 пикселей и от правого/левого краёв на 20 пикселей
+            Margin = new Thickness(0, 30, 0, 0);
+            HorizontalAlignment = HorizontalAlignment.Left; // Выравнивание по левому краю
+        };
+        
+        // Заголовок
+        TextBlock headerTextBlock = new TextBlock
         {
-            double width = RingWidthIncrement * (numberOfRings - i);
-            double height = RingHeight;
+            Text = "Введите параметры тестирования",
+            HorizontalAlignment = HorizontalAlignment.Left
+        };
+        // Применение стиля
+        headerTextBlock.Style = (Style)_mainWindow.FindResource("HeaderTextBlockStyle");
 
-            var shape = new Rectangle
-            {
-                Width = width,
-                Height = height,
-                Fill = Brushes.LightBlue,
-                Stroke = Brushes.Black,
-                StrokeThickness = 1
-            };
-
-            double leftPosition = HanoiCanvas.ActualWidth / num_of_towers / 2 - width / 2;
-            double topPosition = 655 - (i + 1) * height;
-
-            Canvas.SetLeft(shape, leftPosition);
-            Canvas.SetTop(shape, topPosition);
-
-            Panel.SetZIndex(shape, 2);
-
-            HanoiCanvas.Children.Add(shape);
-
-            towers[0].Push(i);
-            diskRectangles[i, 0] = shape;
-        }
-    }
-
-    private async Task GenerateMoves(int n, int from_tower, int to_tower, int else_tower, CancellationToken token)
-    {
-        if (n > 0)
+        // Текстовое поле "Количество колец"
+        TextBlock ringCountLabel = new TextBlock
         {
-            await GenerateMoves(n - 1, from_tower, else_tower, to_tower, token);
-            await MoveDisk(from_tower, to_tower, token);
-            await GenerateMoves(n - 1, else_tower, to_tower, from_tower, token);
-        }
-    }
+            Text = "Количество колец",
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Margin = new Thickness(0, 20, 0, 8),
+            Style = (Style)_mainWindow.FindResource("TextBlockStyle")
+        };
 
-    private async Task MoveDisk(int from, int to, CancellationToken token)
-    {
-        if (towers[from].Count == 0) return;
-
-        token.ThrowIfCancellationRequested();
-
-        int ring = towers[from].Pop();
-        towers[to].Push(ring);
-
-        Rectangle Shape = diskRectangles[ring, from];
-        diskRectangles[ring, to] = Shape;
-
-        double canvasWidth = HanoiCanvas.ActualWidth;
-        double towerSpacing = canvasWidth / num_of_towers;
-        double towerCenterX = towerSpacing / 2 + to * towerSpacing;
-        double targetX = towerCenterX - Shape.Width / 2;
-        double targetY = 655 - towers[to].Count * RingHeight;
-
-        await AnimateDisk(Shape, targetX, targetY);
-    }
-
-    private async Task AnimateDisk(Rectangle shape, double targetX, double targetY)
-    {
-        double currentX = Canvas.GetLeft(shape);
-        double currentY = Canvas.GetTop(shape);
-        int flag = animationSpeed;
-
-        while (Math.Abs(currentX - targetX) > 1 || Math.Abs(currentY - targetY) > 1)
+        // Поле для ввода количества колец
+        TextBox ringCountTextBox = new TextBox
         {
-            while (Math.Abs(currentY - 130) > 1)
-            {
-                currentY += (130 - currentY) / (100.0 / animationSpeed / 1.5);
-                Canvas.SetTop(shape, currentY);
-                await Task.Delay(100 / flag);
-            }
-            while (Math.Abs(currentX - targetX) > 1)
-            {
-                currentX += (targetX - currentX) / (100.0 / animationSpeed);
-                Canvas.SetLeft(shape, currentX);
-                await Task.Delay(100 / flag);
-            }
-            while (Math.Abs(currentY - targetY) > 1)
-            {
-                currentY += (targetY - currentY) / (100.0 / animationSpeed / 1.5);
-                Canvas.SetTop(shape, currentY);
-                await Task.Delay(100 / flag);
-            }
-        }
+            Name = "ringCountTextBox",
+            Width = 360,
+            Margin = new Thickness(0, 0, 0, 20),
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Style = (Style)_mainWindow.FindResource("RoundedTextBoxStyle") 
+        };
 
-        Canvas.SetLeft(shape, targetX);
-        Canvas.SetTop(shape, targetY);
+        // Контейнер для кнопок "Старт" и "Стоп"
+        StackPanel buttonsPanel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Left
+        };
+
+        // Кнопка "Старт"
+        Button startButton = new Button
+        {
+            Name = "startButton",
+            Content = "Старт",
+            Width = 170,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Margin = new Thickness(0, 510, 10, 0),
+            Style = (Style)_mainWindow.FindResource("RoundedButtonStyle") 
+        };
+        startButton.Click += StartButton_Click;
+
+        // Кнопка "Стоп"
+        Button clearButton = new Button
+        {
+            Name = "clearButton",
+            Content = "Стоп",
+            Width = 170,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Margin = new Thickness(10, 510, 0, 0),
+            Style = (Style)_mainWindow.FindResource("RoundedButtonStopStyle"),
+            IsEnabled = false
+        };
+        clearButton.Click += ClearButton_Click;
+
+        // Добавляем кнопки на панель
+        buttonsPanel.Children.Add(startButton);
+        buttonsPanel.Children.Add(clearButton);
+
+        // Добавляем все элементы в левую панель
+        panel.Children.Add(headerTextBlock);
+        panel.Children.Add(ringCountLabel);
+        panel.Children.Add(ringCountTextBox);
+        panel.Children.Add(buttonsPanel);
+        
+        _mainWindow.PageContentControl.Content = panel;
     }
+    
     private async void StartButton_Click(object sender, RoutedEventArgs e)
     {
+        // Обработка нажатия кнопки Старт
+        Button startButton = (Button)sender;
+        TextBox ringCountTextBox = (TextBox)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "ringCountTextBox");
+        Button clearButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "clearButton");
+
+
         startButton.IsEnabled = false;
         ringCountTextBox.IsEnabled = false;
         clearButton.IsEnabled = true;
+        
         cancellationTokenSource = new CancellationTokenSource();
         var token = cancellationTokenSource.Token;
         if (int.TryParse(ringCountTextBox.Text, out int numberOfRings) && numberOfRings > 0 && numberOfRings <= 23)
         {
             InitializeTowers();
-            DrawTowers();
-            InitializeRings(numberOfRings);
+            hanoiTowerDraw.DrawTowers();
+            diskRectangles = hanoiTowerDraw.InitializeRings(numberOfRings, towers);
             try
             {
-                await GenerateMoves(numberOfRings, 0, 1, 2, token);
+                await hanoiTowerDraw.GenerateMoves(numberOfRings, 0, 1, 2, towers, diskRectangles, token);
             }
             catch (OperationCanceledException) { };
         }
@@ -191,5 +157,4 @@ public partial class HanoiTowerPage : Page
         cancellationTokenSource?.Cancel();
         HanoiCanvas.Children.Clear();
     }
-
 }

@@ -31,7 +31,7 @@ namespace lab2
                 fractalsPage.ClearDynamicElements();
             }
             
-            MainFrame.Navigate(new HanoiTowerPage());
+            MainFrame.Navigate(new HanoiTowerPage(this));
         }
         
     }

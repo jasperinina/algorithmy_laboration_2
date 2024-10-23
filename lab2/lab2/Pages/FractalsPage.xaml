@@ -1,7 +1,7 @@
 ﻿<Page x:Class="lab2.Pages.FractalsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Title="Фракталы" Height="900" Width="1600">
+      Title="Фракталы" Height="900" Width="1200">
     
     <Page.Resources>
         <!-- Подключение внешнего файла стилей -->

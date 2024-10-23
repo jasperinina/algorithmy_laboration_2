@@ -26,7 +26,7 @@
              HorizontalAlignment = HorizontalAlignment.Left; // Выравнивание по левому краю
          };
 
-         // Заголовок блока (например, "Введите параметры тестирования")
+         // Заголовок блока 
          TextBlock headerTextBlock = new TextBlock
          {
              Text = "Введите параметры тестирования",
@@ -40,7 +40,7 @@
              Text = "Глубина фрактала",
              HorizontalAlignment = HorizontalAlignment.Left,
              Margin = new Thickness(0, 20, 0, 8),
-             Style = (Style)_mainWindow.FindResource("TextBlockStyle") // Примените стиль для проверки
+             Style = (Style)_mainWindow.FindResource("TextBlockStyle") 
          };
 
          TextBox depthTextBox = new TextBox
@@ -49,7 +49,7 @@
              Width = 360,
              Margin = new Thickness(0, 0, 0, 20),
              HorizontalAlignment = HorizontalAlignment.Left,
-             Style = (Style)_mainWindow.FindResource("RoundedTextBoxStyle") // Примените стиль
+             Style = (Style)_mainWindow.FindResource("RoundedTextBoxStyle") 
          };
 
          Button drawButton = new Button
@@ -58,7 +58,7 @@
              Width = 360,
              HorizontalAlignment = HorizontalAlignment.Left,
              Margin = new Thickness(0, 510, 0, 0),
-             Style = (Style)_mainWindow.FindResource("RoundedButtonStyle") // Примените стиль
+             Style = (Style)_mainWindow.FindResource("RoundedButtonStyle")
          };
          drawButton.Click += Fractal_Click;
 
