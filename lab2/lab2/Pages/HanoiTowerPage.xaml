@@ -16,7 +16,6 @@
     </Page.Resources>
     
     <Grid>
-
         <!-- Canvas для отрисовки Ханойской башни -->
         <Canvas Name="HanoiCanvas" 
                 Background="#FFFFFF" 
@@ -25,6 +24,5 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="10,10,10,45"/>
-        
     </Grid>
 </Page>

@@ -1,9 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Shapes;
+using lab2.Graph;
 using lab2.HanoiTower;
 
 namespace lab2.Pages;
@@ -40,19 +38,17 @@ public partial class HanoiTowerPage : Page
     {
         StackPanel panel = new StackPanel();
         {
-            // Отступ от верхнего блока на 30 пикселей и от правого/левого краёв на 20 пикселей
             Margin = new Thickness(0, 30, 0, 0);
-            HorizontalAlignment = HorizontalAlignment.Left; // Выравнивание по левому краю
+            HorizontalAlignment = HorizontalAlignment.Left;
         };
         
         // Заголовок
         TextBlock headerTextBlock = new TextBlock
         {
             Text = "Введите параметры тестирования",
-            HorizontalAlignment = HorizontalAlignment.Left
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Style = (Style)_mainWindow.FindResource("HeaderTextBlockStyle")
         };
-        // Применение стиля
-        headerTextBlock.Style = (Style)_mainWindow.FindResource("HeaderTextBlockStyle");
 
         // Текстовое поле "Количество колец"
         TextBlock ringCountLabel = new TextBlock
@@ -72,7 +68,7 @@ public partial class HanoiTowerPage : Page
             HorizontalAlignment = HorizontalAlignment.Left,
             Style = (Style)_mainWindow.FindResource("RoundedTextBoxStyle") 
         };
-
+        
         // Контейнер для кнопок "Старт" и "Стоп"
         StackPanel buttonsPanel = new StackPanel
         {
@@ -87,7 +83,7 @@ public partial class HanoiTowerPage : Page
             Content = "Старт",
             Width = 170,
             HorizontalAlignment = HorizontalAlignment.Left,
-            Margin = new Thickness(0, 510, 10, 0),
+            Margin = new Thickness(0, 450, 10, 0),
             Style = (Style)_mainWindow.FindResource("RoundedButtonStyle") 
         };
         startButton.Click += StartButton_Click;
@@ -99,11 +95,21 @@ public partial class HanoiTowerPage : Page
             Content = "Стоп",
             Width = 170,
             HorizontalAlignment = HorizontalAlignment.Right,
-            Margin = new Thickness(10, 510, 0, 0),
+            Margin = new Thickness(10, 450, 0, 0),
             Style = (Style)_mainWindow.FindResource("RoundedButtonStopStyle"),
             IsEnabled = false
         };
         clearButton.Click += ClearButton_Click;
+        
+        Button graphButton = new Button
+        {
+            Content = "График зависимости",
+            Width = 360,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Margin = new Thickness(0, 20, 0, 0),
+            Style = (Style)_mainWindow.FindResource("RoundedButtonGraphStyle")
+        };
+        graphButton.Click += Graph_Click;
 
         // Добавляем кнопки на панель
         buttonsPanel.Children.Add(startButton);
@@ -114,6 +120,7 @@ public partial class HanoiTowerPage : Page
         panel.Children.Add(ringCountLabel);
         panel.Children.Add(ringCountTextBox);
         panel.Children.Add(buttonsPanel);
+        panel.Children.Add(graphButton);
         
         _mainWindow.PageContentControl.Content = panel;
     }
@@ -132,11 +139,13 @@ public partial class HanoiTowerPage : Page
         
         cancellationTokenSource = new CancellationTokenSource();
         var token = cancellationTokenSource.Token;
+        
         if (int.TryParse(ringCountTextBox.Text, out int numberOfRings) && numberOfRings > 0 && numberOfRings <= 23)
         {
             InitializeTowers();
             hanoiTowerDraw.DrawTowers();
             diskRectangles = hanoiTowerDraw.InitializeRings(numberOfRings, towers);
+            
             try
             {
                 await hanoiTowerDraw.GenerateMoves(numberOfRings, 0, 1, 2, towers, diskRectangles, token);
@@ -147,14 +156,21 @@ public partial class HanoiTowerPage : Page
         {
             MessageBox.Show("Введите корректное количество колец");
         }
+        
         startButton.IsEnabled = true;
         ringCountTextBox.IsEnabled = true;
         clearButton.IsEnabled = false;
+    }
+    
+    private void Graph_Click(object sender, RoutedEventArgs e)
+    {
+        // Открытие нового окна с графиком
+        GraphHanoiTower graphWindow = new GraphHanoiTower();
+        graphWindow.Show();
     }
 
     private void ClearButton_Click(object sender, RoutedEventArgs e)
     {
         cancellationTokenSource?.Cancel();
-        HanoiCanvas.Children.Clear();
     }
 }

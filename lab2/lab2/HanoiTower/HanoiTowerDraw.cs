@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -95,7 +96,7 @@ public class HanoiTowerDraw
     {
         if (towers[from].Count == 0) return;
 
-        token.ThrowIfCancellationRequested();
+        token.ThrowIfCancellationRequested();   
 
         int ring = towers[from].Pop();
         towers[to].Push(ring);

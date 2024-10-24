@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Study\\algorithms anna\\algorithmy_laboration_2\\lab2\\lab2\\lab2.csproj": {}
+    "D:\\Study\\2 курс\\algorithms\\algorithmy_laboration_2\\lab2\\lab2\\lab2.csproj": {}
   },
   "projects": {
-    "D:\\Study\\algorithms anna\\algorithmy_laboration_2\\lab2\\lab2\\lab2.csproj": {
+    "D:\\Study\\2 курс\\algorithms\\algorithmy_laboration_2\\lab2\\lab2\\lab2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Study\\algorithms anna\\algorithmy_laboration_2\\lab2\\lab2\\lab2.csproj",
+        "projectUniqueName": "D:\\Study\\2 курс\\algorithms\\algorithmy_laboration_2\\lab2\\lab2\\lab2.csproj",
         "projectName": "lab2",
-        "projectPath": "D:\\Study\\algorithms anna\\algorithmy_laboration_2\\lab2\\lab2\\lab2.csproj",
-        "packagesPath": "C:\\Users\\denis\\.nuget\\packages\\",
-        "outputPath": "D:\\Study\\algorithms anna\\algorithmy_laboration_2\\lab2\\lab2\\obj\\",
+        "projectPath": "D:\\Study\\2 курс\\algorithms\\algorithmy_laboration_2\\lab2\\lab2\\lab2.csproj",
+        "packagesPath": "C:\\Users\\annag\\.nuget\\packages\\",
+        "outputPath": "D:\\Study\\2 курс\\algorithms\\algorithmy_laboration_2\\lab2\\lab2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\denis\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\annag\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,6 +37,16 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "ScottPlot": {
+              "target": "Package",
+              "version": "[5.0.40, )"
+            },
+            "ScottPlot.WPF": {
+              "target": "Package",
+              "version": "[5.0.40, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +66,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

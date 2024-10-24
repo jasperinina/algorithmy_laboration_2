@@ -129,7 +129,33 @@
         </Setter>
     </Style>
     
-    <!-- Стиль для кнопки стоп с закругленными углами --> 
+    <!-- Стиль для кнопок графика с закругленными углами --> 
+    <Style x:Key="RoundedButtonGraphStyle" TargetType="Button">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="FontFamily" Value="{StaticResource EuclidSquareSemiBoldBold}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="#000000" />
+        <Setter Property="Background" Value="#F5F5F5" />
+        <Setter Property="BorderBrush" Value="#1F77B4" /> 
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="10"  
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Стиль для кнопок шагов с закругленными углами --> 
     <Style x:Key="RoundedButtonStepsStyle" TargetType="Button">
         <Setter Property="Height" Value="40" />
         <Setter Property="FontFamily" Value="{StaticResource EuclidSquareSemiBoldBold}" />
@@ -137,8 +163,8 @@
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Foreground" Value="#000000" />
         <Setter Property="Background" Value="#F5F5F5" />
-        <Setter Property="BorderBrush" Value="#1F77B4" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="#000000" />
+        <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Padding" Value="10" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">

@@ -1,7 +1,8 @@
-﻿using System.Windows.Controls;
-using System.Windows.Media;
+﻿using System.Drawing;
+using System.Windows.Controls;
 using System.Windows.Shapes;
-using System.Drawing;
+using Brush = System.Windows.Media.Brush;
+using System.Diagnostics;
 
 namespace lab2.Fractals
 {
@@ -23,6 +24,21 @@ namespace lab2.Fractals
             _coordX = center.X;
             _coordY = center.Y;
             DrawStar(_coordX, _coordY, _radius, _angle, deth);
+        }
+        
+        public double MeasureRenderTime(int depth)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            // Очищаем канву перед новой отрисовкой
+            _canvas.Children.Clear();
+
+            // Выполняем отрисовку фрактала с заданной глубиной рекурсии
+            DrawStar(_coordX, _coordY, _radius, _angle, depth);
+
+            stopwatch.Stop();
+            return stopwatch.ElapsedMilliseconds; // Возвращаем время в миллисекундах
         }
         
         private void DrawLine(Point start, Point end, Brush color, int thickness)
