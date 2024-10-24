@@ -14,6 +14,8 @@ public partial class HanoiTowerPage : Page
     private CancellationTokenSource cancellationTokenSource;
     private HanoiTowerDraw hanoiTowerDraw;
     
+    private int currentMoveIndex = -1;
+
     private MainWindow _mainWindow;
 
     public HanoiTowerPage(MainWindow mainWindow)
@@ -83,10 +85,11 @@ public partial class HanoiTowerPage : Page
             Content = "Старт",
             Width = 170,
             HorizontalAlignment = HorizontalAlignment.Left,
-            Margin = new Thickness(0, 450, 10, 0),
-            Style = (Style)_mainWindow.FindResource("RoundedButtonStyle") 
+            Margin = new Thickness(0, 370, 10, 0),
+            Style = (Style)_mainWindow.FindResource("RoundedButtonStyle")
         };
         startButton.Click += StartButton_Click;
+
 
         // Кнопка "Стоп"
         Button clearButton = new Button
@@ -95,18 +98,50 @@ public partial class HanoiTowerPage : Page
             Content = "Стоп",
             Width = 170,
             HorizontalAlignment = HorizontalAlignment.Right,
-            Margin = new Thickness(10, 450, 0, 0),
+            Margin = new Thickness(10, 370, 0, 0),
             Style = (Style)_mainWindow.FindResource("RoundedButtonStopStyle"),
             IsEnabled = false
         };
         clearButton.Click += ClearButton_Click;
+        
+        // Контейнер для кнопок "Шаг вперед" и "Шаг назад"
+        StackPanel buttonsPanel1 = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Left
+        };
+        
+        // Кнопка "Шаг вперед"
+        Button stepForwardButton = new Button
+        {
+            Name = "stepForwardButton",
+            Content = "Шаг вперед",
+            Width = 170,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Margin = new Thickness(0, 20, 10, 0),
+            Style = (Style)_mainWindow.FindResource("RoundedButtonStepsStyle") 
+        };
+        stepForwardButton.Click += StepForwardButton_Click;
+
+        // Кнопка "Шаг назад"
+        Button stepBackButton = new Button
+        {
+            Name = "stepBackButton",
+            Content = "Шаг назад",
+            Width = 170,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Margin = new Thickness(10, 20, 0, 0),
+            Style = (Style)_mainWindow.FindResource("RoundedButtonStepsStyle"),
+            IsEnabled = false
+        };
+        stepBackButton.Click += StepBackButton_Click;
         
         Button graphButton = new Button
         {
             Content = "График зависимости",
             Width = 360,
             HorizontalAlignment = HorizontalAlignment.Left,
-            Margin = new Thickness(0, 20, 0, 0),
+            Margin = new Thickness(0, 40, 0, 0),
             Style = (Style)_mainWindow.FindResource("RoundedButtonGraphStyle")
         };
         graphButton.Click += Graph_Click;
@@ -114,52 +149,125 @@ public partial class HanoiTowerPage : Page
         // Добавляем кнопки на панель
         buttonsPanel.Children.Add(startButton);
         buttonsPanel.Children.Add(clearButton);
-
+        
+        // Добавляем кнопки на панель
+        buttonsPanel1.Children.Add(stepForwardButton);
+        buttonsPanel1.Children.Add(stepBackButton);
+        
         // Добавляем все элементы в левую панель
         panel.Children.Add(headerTextBlock);
         panel.Children.Add(ringCountLabel);
         panel.Children.Add(ringCountTextBox);
         panel.Children.Add(buttonsPanel);
+        panel.Children.Add(buttonsPanel1);
         panel.Children.Add(graphButton);
         
         _mainWindow.PageContentControl.Content = panel;
     }
     
+    private async Task PlayMovesAsync(CancellationToken token)
+    {
+        for (currentMoveIndex = 0; currentMoveIndex < hanoiTowerDraw.Moves.Count; currentMoveIndex++)
+        {
+            token.ThrowIfCancellationRequested();
+
+            var move = hanoiTowerDraw.Moves[currentMoveIndex];
+            await hanoiTowerDraw.MoveDisk(move.from, move.to, towers, diskRectangles, token, animate: true);
+
+            // Задержка между ходами (настраиваемая)
+            await Task.Delay(500, token);
+        }
+    }
+    
     private async void StartButton_Click(object sender, RoutedEventArgs e)
     {
-        // Обработка нажатия кнопки Старт
+        // Получаем ссылки на элементы управления
         Button startButton = (Button)sender;
         TextBox ringCountTextBox = (TextBox)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "ringCountTextBox");
         Button clearButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "clearButton");
+        Button stepForwardButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "stepForwardButton");
+        Button stepBackButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "stepBackButton");
 
-
+        // Отключаем/включаем кнопки
         startButton.IsEnabled = false;
         ringCountTextBox.IsEnabled = false;
         clearButton.IsEnabled = true;
-        
+        stepForwardButton.IsEnabled = false;
+        stepBackButton.IsEnabled = false;
+
         cancellationTokenSource = new CancellationTokenSource();
         var token = cancellationTokenSource.Token;
-        
+
         if (int.TryParse(ringCountTextBox.Text, out int numberOfRings) && numberOfRings > 0 && numberOfRings <= 23)
         {
             InitializeTowers();
+            hanoiTowerDraw.ClearCanvas();
             hanoiTowerDraw.DrawTowers();
             diskRectangles = hanoiTowerDraw.InitializeRings(numberOfRings, towers);
-            
+
+            // Генерируем список ходов
+            hanoiTowerDraw.Moves.Clear();
+            hanoiTowerDraw.GenerateMovesList(numberOfRings, 0, 1, 2);
+
+            currentMoveIndex = -1; // Сбрасываем индекс текущего хода
+
+            // Запускаем автоматическую анимацию
             try
             {
-                await hanoiTowerDraw.GenerateMoves(numberOfRings, 0, 1, 2, towers, diskRectangles, token);
+                await PlayMovesAsync(token);
             }
-            catch (OperationCanceledException) { };
+            catch (OperationCanceledException)
+            {
+                // Анимация была остановлена
+            }
+
+            // После завершения анимации
+            startButton.IsEnabled = true;
+            ringCountTextBox.IsEnabled = true;
+            clearButton.IsEnabled = false;
+            stepForwardButton.IsEnabled = false; // Нет шагов вперед после завершения
+            stepBackButton.IsEnabled = currentMoveIndex >= 0;
         }
         else
         {
             MessageBox.Show("Введите корректное количество колец");
+            startButton.IsEnabled = true;
+            ringCountTextBox.IsEnabled = true;
+            clearButton.IsEnabled = false;
         }
-        
-        startButton.IsEnabled = true;
-        ringCountTextBox.IsEnabled = true;
-        clearButton.IsEnabled = false;
+    }
+    
+    private async void StepForwardButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (currentMoveIndex + 1 < hanoiTowerDraw.Moves.Count)
+        {
+            currentMoveIndex++;
+            var move = hanoiTowerDraw.Moves[currentMoveIndex];
+            await hanoiTowerDraw.MoveDisk(move.from, move.to, towers, diskRectangles, CancellationToken.None, animate: true);
+
+            UpdateStepButtons();
+        }
+    }
+
+    private async void StepBackButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (currentMoveIndex >= 0)
+        {
+            var move = hanoiTowerDraw.Moves[currentMoveIndex];
+            await hanoiTowerDraw.MoveDiskBack(move.from, move.to, towers, diskRectangles, CancellationToken.None, animate: true);
+            currentMoveIndex--;
+
+            UpdateStepButtons();
+        }
+    }
+    
+    private void UpdateStepButtons()
+    {
+        Button stepForwardButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "stepForwardButton");
+        Button stepBackButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "stepBackButton");
+
+        stepForwardButton.IsEnabled = currentMoveIndex + 1 < hanoiTowerDraw.Moves.Count;
+        stepBackButton.IsEnabled = currentMoveIndex >= 0;
     }
     
     private void Graph_Click(object sender, RoutedEventArgs e)
@@ -172,5 +280,22 @@ public partial class HanoiTowerPage : Page
     private void ClearButton_Click(object sender, RoutedEventArgs e)
     {
         cancellationTokenSource?.Cancel();
+
+        // Получаем ссылки на элементы управления
+        Button startButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "startButton");
+        TextBox ringCountTextBox = (TextBox)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "ringCountTextBox");
+        Button clearButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "clearButton");
+        Button stepForwardButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "stepForwardButton");
+        Button stepBackButton = (Button)LogicalTreeHelper.FindLogicalNode(Application.Current.MainWindow, "stepBackButton");
+
+        // Отключаем кнопки
+        clearButton.IsEnabled = false;
+
+        // Включаем возможность использовать шаги
+        stepForwardButton.IsEnabled = currentMoveIndex + 1 < hanoiTowerDraw.Moves.Count;
+        stepBackButton.IsEnabled = currentMoveIndex >= 0;
+
+        startButton.IsEnabled = true;
+        ringCountTextBox.IsEnabled = true;
     }
 }

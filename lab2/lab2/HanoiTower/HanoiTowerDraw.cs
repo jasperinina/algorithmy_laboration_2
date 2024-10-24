@@ -10,6 +10,9 @@ public class HanoiTowerDraw
     private const int RingHeight = 20;
     private const int RingWidthIncrement = 15;
     private Canvas HanoiCanvas;
+    
+    public List<(int from, int to)> Moves { get; private set; } = new List<(int from, int to)>();
+
 
     public HanoiTowerDraw(Canvas hanoiCanvas)
     { 
@@ -82,36 +85,64 @@ public class HanoiTowerDraw
         return diskRectangles;
     }
 
-    public async Task GenerateMoves(int n, int from_tower, int to_tower, int else_tower, Stack<int>[] towers, Rectangle[,] diskRectangles, CancellationToken token)
-    {
-        if (n > 0)
-        {
-            await GenerateMoves(n - 1, from_tower, else_tower, to_tower, towers, diskRectangles, token);
-            await MoveDisk(from_tower, to_tower, towers, diskRectangles, token);
-            await GenerateMoves(n - 1, else_tower, to_tower, from_tower, towers, diskRectangles, token);
-        }
-    }
-
-    public async Task MoveDisk(int from, int to, Stack<int>[] towers, Rectangle[,] diskRectangles, CancellationToken token)
+    public async Task MoveDisk(int from, int to, Stack<int>[] towers, Rectangle[,] diskRectangles, CancellationToken token, bool animate = true)
     {
         if (towers[from].Count == 0) return;
 
-        token.ThrowIfCancellationRequested();   
+        token.ThrowIfCancellationRequested();
 
         int ring = towers[from].Pop();
         towers[to].Push(ring);
 
         Rectangle shape = diskRectangles[ring, from];
         diskRectangles[ring, to] = shape;
+        diskRectangles[ring, from] = null;
 
         double canvasWidth = HanoiCanvas.ActualWidth;
         double towerSpacing = canvasWidth / 3;
         double targetX = towerSpacing / 2 + to * towerSpacing - shape.Width / 2;
         double targetY = 655 - towers[to].Count * RingHeight;
 
-        await AnimateDisk(shape, targetX, targetY);
+        if (animate)
+        {
+            await AnimateDisk(shape, targetX, targetY);
+        }
+        else
+        {
+            Canvas.SetLeft(shape, targetX);
+            Canvas.SetTop(shape, targetY);
+        }
     }
 
+    public async Task MoveDiskBack(int from, int to, Stack<int>[] towers, Rectangle[,] diskRectangles, CancellationToken token, bool animate = true)
+    {
+        if (towers[to].Count == 0) return; // Попытка взять диск с пустой башни
+
+        token.ThrowIfCancellationRequested();
+
+        int ring = towers[to].Pop(); // Забираем диск с башни 'to'
+        towers[from].Push(ring);     // Кладем диск на башню 'from'
+
+        Rectangle shape = diskRectangles[ring, to];
+        diskRectangles[ring, from] = shape;
+        diskRectangles[ring, to] = null;
+
+        double canvasWidth = HanoiCanvas.ActualWidth;
+        double towerSpacing = canvasWidth / 3;
+        double targetX = towerSpacing / 2 + from * towerSpacing - shape.Width / 2;
+        double targetY = 655 - towers[from].Count * RingHeight;
+
+        if (animate)
+        {
+            await AnimateDisk(shape, targetX, targetY);
+        }
+        else
+        {
+            Canvas.SetLeft(shape, targetX);
+            Canvas.SetTop(shape, targetY);
+        }
+    }
+    
     public async Task AnimateDisk(Rectangle shape, double targetX, double targetY)
     {
         double currentX = Canvas.GetLeft(shape);
@@ -147,6 +178,16 @@ public class HanoiTowerDraw
 
         Canvas.SetLeft(shape, targetX);
         Canvas.SetTop(shape, targetY);
+    }
+    
+    public void GenerateMovesList(int n, int from_tower, int to_tower, int else_tower)
+    {
+        if (n > 0)
+        {
+            GenerateMovesList(n - 1, from_tower, else_tower, to_tower);
+            Moves.Add((from_tower, to_tower));
+            GenerateMovesList(n - 1, else_tower, to_tower, from_tower);
+        }
     }
 
     public void ClearCanvas()

@@ -57,7 +57,7 @@ public partial class FractalsPage : Page
             Content = "Нарисовать фрактал",
             Width = 360,
             HorizontalAlignment = HorizontalAlignment.Left,
-            Margin = new Thickness(0, 450, 0, 0),
+            Margin = new Thickness(0, 430, 0, 0),
             Style = (Style)_mainWindow.FindResource("RoundedButtonStyle")
         };
         drawButton.Click += Fractal_Click;
@@ -67,7 +67,7 @@ public partial class FractalsPage : Page
             Content = "График зависимости",
             Width = 360,
             HorizontalAlignment = HorizontalAlignment.Left,
-            Margin = new Thickness(0, 20, 0, 0),
+            Margin = new Thickness(0, 40, 0, 0),
             Style = (Style)_mainWindow.FindResource("RoundedButtonGraphStyle")
         };
         graphButton.Click += Graph_Click;
