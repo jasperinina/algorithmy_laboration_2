@@ -10,10 +10,8 @@ public class HanoiTowerDraw
     private const int RingHeight = 20;
     private const int RingWidthIncrement = 15;
     private Canvas HanoiCanvas;
-    
     public List<(int from, int to)> Moves { get; private set; } = new List<(int from, int to)>();
-
-
+    
     public HanoiTowerDraw(Canvas hanoiCanvas)
     { 
         HanoiCanvas = hanoiCanvas;
@@ -41,9 +39,9 @@ public class HanoiTowerDraw
 
             var tower_base = new Line
             {
-                X1 = towerX - 50, // Слева от центра башни
+                X1 = towerX - 180,
                 Y1 = HanoiCanvas.ActualHeight - 50,
-                X2 = towerX + 50, // Справа от центра башни
+                X2 = towerX + 180, 
                 Y2 = HanoiCanvas.ActualHeight - 50,
                 Stroke = Brushes.Black,
                 StrokeThickness = 4
@@ -71,7 +69,7 @@ public class HanoiTowerDraw
             };
 
             double leftPosition = HanoiCanvas.ActualWidth / 3 / 2 - width / 2;
-            double topPosition = 655 - (i + 1) * height;
+            double topPosition = 750 - (i + 1) * height;
 
             Canvas.SetLeft(shape, leftPosition);
             Canvas.SetTop(shape, topPosition);
@@ -101,7 +99,7 @@ public class HanoiTowerDraw
         double canvasWidth = HanoiCanvas.ActualWidth;
         double towerSpacing = canvasWidth / 3;
         double targetX = towerSpacing / 2 + to * towerSpacing - shape.Width / 2;
-        double targetY = 655 - towers[to].Count * RingHeight;
+        double targetY = 750 - towers[to].Count * RingHeight;
 
         if (animate)
         {
@@ -116,12 +114,12 @@ public class HanoiTowerDraw
 
     public async Task MoveDiskBack(int from, int to, Stack<int>[] towers, Rectangle[,] diskRectangles, CancellationToken token, bool animate = true)
     {
-        if (towers[to].Count == 0) return; // Попытка взять диск с пустой башни
+        if (towers[to].Count == 0) return;
 
         token.ThrowIfCancellationRequested();
 
-        int ring = towers[to].Pop(); // Забираем диск с башни 'to'
-        towers[from].Push(ring);     // Кладем диск на башню 'from'
+        int ring = towers[to].Pop(); 
+        towers[from].Push(ring);    
 
         Rectangle shape = diskRectangles[ring, to];
         diskRectangles[ring, from] = shape;
@@ -130,7 +128,7 @@ public class HanoiTowerDraw
         double canvasWidth = HanoiCanvas.ActualWidth;
         double towerSpacing = canvasWidth / 3;
         double targetX = towerSpacing / 2 + from * towerSpacing - shape.Width / 2;
-        double targetY = 655 - towers[from].Count * RingHeight;
+        double targetY = 750 - towers[from].Count * RingHeight;
 
         if (animate)
         {
