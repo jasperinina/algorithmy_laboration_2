@@ -30,7 +30,7 @@ namespace lab2.Graph
 
             // Создаем график зависимости ранга фрактала от времени отрисовки
             WpfPlot1.Plot.Add.Scatter(ranks, renderTimes);
-            WpfPlot1.Plot.Title("Зависимость ранга фрактала от времени отрисовки");
+            WpfPlot1.Plot.Title("Зависимость времени отрисовки от ранга фрактала");
             WpfPlot1.Plot.XLabel("Ранг фрактала");
             WpfPlot1.Plot.YLabel("Время отрисовки (мс)");
             

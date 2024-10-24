@@ -39,9 +39,9 @@ public class HanoiTowerDraw
 
             var tower_base = new Line
             {
-                X1 = towerX - 180,
+                X1 = towerX - 160,
                 Y1 = HanoiCanvas.ActualHeight - 50,
-                X2 = towerX + 180, 
+                X2 = towerX + 160, 
                 Y2 = HanoiCanvas.ActualHeight - 50,
                 Stroke = Brushes.Black,
                 StrokeThickness = 4

@@ -198,7 +198,7 @@ public partial class HanoiTowerPage : Page
         cancellationTokenSource = new CancellationTokenSource();
         var token = cancellationTokenSource.Token;
 
-        if (int.TryParse(ringCountTextBox.Text, out int numberOfRings) && numberOfRings > 0 && numberOfRings <= 23)
+        if (int.TryParse(ringCountTextBox.Text, out int numberOfRings) && numberOfRings > 0 && numberOfRings <= 30)
         {
             InitializeTowers();
             hanoiTowerDraw.ClearCanvas();

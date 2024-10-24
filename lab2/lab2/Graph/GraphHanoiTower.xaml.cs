@@ -19,7 +19,7 @@ public partial class GraphHanoiTower : Window
         List<double> diskCounts = new List<double>();
         List<double> times = new List<double>();
 
-        for (int n = 3; n <= 23; n++)
+        for (int n = 3; n <= 30; n++)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
