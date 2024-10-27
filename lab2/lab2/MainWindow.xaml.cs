@@ -32,6 +32,5 @@ namespace lab2
             
             MainFrame.Navigate(new HanoiTowerPage(this));
         }
-        
     }
 }

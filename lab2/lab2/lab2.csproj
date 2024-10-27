@@ -6,11 +6,32 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
+
+        <!-- Публикация в виде одного файла -->
+        <PublishSingleFile>true</PublishSingleFile>
+        <!-- Отключение сжатия для совместимости с WPF -->
+        <EnableCompressionInSingleFile>false</EnableCompressionInSingleFile>
+        <!-- Включение всех необходимых зависимостей -->
+        <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+        <!-- Отключение тримминга для избежания удаления важных частей кода -->
+        <PublishTrimmed>false</PublishTrimmed>
+        <!-- Создание самодостаточного приложения -->
+        <SelfContained>true</SelfContained>
+        <!-- Указание целевой платформы выполнения -->
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier> <!-- или win-x86, в зависимости от вашей системы -->
+        <ApplicationIcon>UI\tower.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="ScottPlot" Version="5.0.40" />
       <PackageReference Include="ScottPlot.WPF" Version="5.0.40" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="UI\tower.ico" />
+      <Resource Include="UI\tower.ico" /> 
+      <Page Remove="UI\Styles.xaml" />
+      <Resource Include="UI\Styles.xaml" />
     </ItemGroup>
 
 </Project>
