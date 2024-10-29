@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -149,7 +148,6 @@ public class HanoiTowerDraw
 
         while (Math.Abs(currentX - targetX) > 1 || Math.Abs(currentY - targetY) > 1)
         { 
-            // Анимация по оси Y вверх
             while (Math.Abs(currentY - 130) > 1)
             { 
                 currentY += (130 - currentY) / (100.0 / flag / 1.5);
@@ -157,7 +155,6 @@ public class HanoiTowerDraw
                 await Task.Delay(100 / flag);
             }
             
-            // Анимация по оси X
             while (Math.Abs(currentX - targetX) > 1)
             {
                 currentX += (targetX - currentX) / (100.0 / flag);
@@ -165,7 +162,6 @@ public class HanoiTowerDraw
                 await Task.Delay(100 / flag);
             }
             
-            // Анимация по оси Y вниз
             while (Math.Abs(currentY - targetY) > 1)
             {
                 currentY += (targetY - currentY) / (100.0 / flag / 1.5);

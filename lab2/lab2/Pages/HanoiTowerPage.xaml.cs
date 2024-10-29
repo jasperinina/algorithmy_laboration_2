@@ -44,7 +44,6 @@ public partial class HanoiTowerPage : Page
             HorizontalAlignment = HorizontalAlignment.Left;
         };
         
-        // Заголовок
         TextBlock headerTextBlock = new TextBlock
         {
             Text = "Введите параметры тестирования",
@@ -52,7 +51,6 @@ public partial class HanoiTowerPage : Page
             Style = (Style)_mainWindow.FindResource("HeaderTextBlockStyle")
         };
 
-        // Текстовое поле "Количество колец"
         TextBlock ringCountLabel = new TextBlock
         {
             Text = "Количество колец",
@@ -61,7 +59,6 @@ public partial class HanoiTowerPage : Page
             Style = (Style)_mainWindow.FindResource("TextBlockStyle")
         };
 
-        // Поле для ввода количества колец
         TextBox ringCountTextBox = new TextBox
         {
             Name = "ringCountTextBox",
@@ -78,7 +75,6 @@ public partial class HanoiTowerPage : Page
             HorizontalAlignment = HorizontalAlignment.Left
         };
 
-        // Кнопка "Старт"
         Button startButton = new Button
         {
             Name = "startButton",
@@ -90,8 +86,6 @@ public partial class HanoiTowerPage : Page
         };
         startButton.Click += StartButton_Click;
 
-
-        // Кнопка "Стоп"
         Button clearButton = new Button
         {
             Name = "clearButton",
@@ -111,7 +105,6 @@ public partial class HanoiTowerPage : Page
             HorizontalAlignment = HorizontalAlignment.Left
         };
         
-        // Кнопка "Шаг вперед"
         Button stepForwardButton = new Button
         {
             Name = "stepForwardButton",
@@ -123,7 +116,6 @@ public partial class HanoiTowerPage : Page
         };
         stepForwardButton.Click += StepForwardButton_Click;
 
-        // Кнопка "Шаг назад"
         Button stepBackButton = new Button
         {
             Name = "stepBackButton",

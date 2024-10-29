@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using lab2.HanoiTower;
 using ScottPlot;
 
 namespace lab2.Graph;
@@ -33,7 +31,7 @@ public partial class GraphHanoiTower : Window
         var plt = wpfPlot.Plot;
         plt.Clear();
 
-        // Добавление Scatter-графика в ScottPlot 5.x
+        // Добавление графика
         var scatter = plt.Add.Scatter(diskCounts.ToArray(), times.ToArray());
         scatter.MarkerSize = 5;
         scatter.MarkerShape = MarkerShape.FilledCircle;

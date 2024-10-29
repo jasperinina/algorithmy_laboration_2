@@ -17,17 +17,15 @@ public partial class FractalsPage : Page
         AddFractalControls();
     }
      
-    // Метод для добавления элементов управления фракталами
+    // Метод для добавления динамических элементов управления фракталами
     private void AddFractalControls()
     { 
         StackPanel panel = new StackPanel();
         { 
-            // Отступ от верхнего блока на 30 пикселей и от правого/левого краёв на 20 пикселей
             Margin = new Thickness(0, 30, 0, 0); 
-            HorizontalAlignment = HorizontalAlignment.Left; // Выравнивание по левому краю
+            HorizontalAlignment = HorizontalAlignment.Left;
         };
-
-        // Заголовок блока 
+        
         TextBlock headerTextBlock = new TextBlock
         {
             Text = "Введите параметры тестирования", 
@@ -71,8 +69,7 @@ public partial class FractalsPage : Page
             Style = (Style)_mainWindow.FindResource("RoundedButtonGraphStyle")
         };
         graphButton.Click += Graph_Click;
-         
-
+        
         panel.Children.Add(headerTextBlock); 
         panel.Children.Add(depthTextBlock);
         panel.Children.Add(depthTextBox);
@@ -115,7 +112,6 @@ public partial class FractalsPage : Page
 
      private void Graph_Click(object sender, RoutedEventArgs e)
      {
-         // Открытие нового окна с графиком
          GraphFractal graphWindow = new GraphFractal();
          graphWindow.Show();
      }
